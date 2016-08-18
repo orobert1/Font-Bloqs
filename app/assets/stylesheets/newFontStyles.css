@@ -1,0 +1,24 @@
+.dropTarget{
+  float:left;
+  margin:20px;
+  width:400px;
+  height:250px;
+  border:dashed;
+  border-color:blue;
+  border-width:4pt;
+  border-radius: 5pt;
+  transition: .4s;
+}
+
+.drag-target-dragged{
+  background-color: rgb(200,240,220);
+  transition: .4s;
+  color:white
+
+}
+
+.inner-center-text{
+  margin-top: 120px;
+  text-align: center;
+  color:blue;
+}
