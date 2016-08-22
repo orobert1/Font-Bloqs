@@ -68,6 +68,7 @@ TrueTypeFont.prototype = {
     },
     getGlyphOffset: function(index) {
         assert("loca" in this.tables);
+
         var table = this.tables["loca"];
         var file = this.file;
         var offset, old;
@@ -93,9 +94,6 @@ TrueTypeFont.prototype = {
            return null;
        }
 
-       assert(offset >= this.tables["glyf"].offset);
-       assert(offset < this.tables["glyf"].offset + this.tables["glyf"].length);
-
        file.seek(offset);
 
        var glyph = {
@@ -106,7 +104,6 @@ TrueTypeFont.prototype = {
            yMax: file.getFword()
        };
 
-       assert(glyph.numberOfContours >= -1);
 
        if (glyph.numberOfContours === -1) {
            this.readSimpleGlyph(file, glyph);
@@ -117,7 +114,7 @@ TrueTypeFont.prototype = {
        return glyph;
    },
    readSimpleGlyph: function(file, glyph) {
-
+     console.log("start"+this.file.pos)
        var ON_CURVE        =  1,
            X_IS_BYTE       =  2,
            Y_IS_BYTE       =  4,
@@ -129,21 +126,19 @@ TrueTypeFont.prototype = {
        glyph.contourEnds = [];
        var points = glyph.points = [];
 
+       glyph.readerBPos = file.pos;
        for( var i = 0; i < glyph.numberOfContours; i++ ) {
            glyph.contourEnds.push(file.getUint16());
        }
 
        // skip over intructions
        file.seek(file.getUint16() + file.tell());
-
        if (glyph.numberOfContours === 0) {
            return;
        }
-
        var numPoints = Math.max.apply(null, glyph.contourEnds) + 1;
-
        var flags = [];
-
+       glyph.beginPos = file.pos;
        for( i = 0; i < numPoints; i++ ) {
            var flag = file.getUint8();
            flags.push(flag);
@@ -152,6 +147,8 @@ TrueTypeFont.prototype = {
            });
 
            if ( flag & REPEAT ) {
+              glyph.repeat = 1;
+              glyph.fuck = "asks";
                var repeatCount = file.getUint8();
                assert(repeatCount > 0);
                i += repeatCount;
@@ -165,95 +162,49 @@ TrueTypeFont.prototype = {
        }
 
        function readCoords(name, byteFlag, deltaFlag, min, max) {
-           var value = 0;
+         let flog = flags[0];
+          if(~flog){
+          }
 
+           var value = 0;
            for( var i = 0; i < numPoints; i++ ) {
                var flag = flags[i];
+               if(flag&8){
+                 points[i].repeat = 1;
+               }
                if ( flag & byteFlag ) {
                    if ( flag & deltaFlag ) {
                        value += file.getUint8();
+                       points[i]["EightBitPos"+name] = flag;
+                       points[i]["both"+name] = 1;
                    } else {
                        value -= file.getUint8();
+                       points[i]["EightBitNeg"+name] = 1;
+
                    }
                } else if ( ~flag & deltaFlag ) {
+                  points[i]["Split"+name] = 1;
                    value += file.getInt16();
-               } else {
-                   // value is unchanged.
-               }
+               }else if(flag & deltaFlag){
+                   points[i]["SixteenBit"+name] = flag&deltaFlag;
+                   points[i]["Same"+name] = 1;
 
+
+               } else {
+                 points[i]["Same"+name] = 1;
+               }
                points[i][name] = value;
+               points[i].endy = file.pos;
            }
        }
 
        readCoords("x", X_IS_BYTE, X_DELTA, glyph.xMin, glyph.xMax);
        readCoords("y", Y_IS_BYTE, Y_DELTA, glyph.yMin, glyph.yMax);
-   },
-   drawGlyph: function(index, ctx) {
-
-        var glyph = this.readGlyph(index);
-        if ( glyph === null || glyph.type !== "simple" ) {
-            return false;
-        }
-        let points = glyph.points;
-        var p = 0,
-            c = 0,
-            fourth = 0,
-            first = 1;
+       glyph.readerEndPos = file.pos;
+       console.log("end", this.file.pos)
+   }
 
 
-        while (p < glyph.points.length) {
-            var point = glyph.points[p];
-            if ( first === 1 ) {
-                ctx.moveTo(point.x, point.y);
-                first = 0;
-            } else {
-              if(glyph.contourEnds!==p+1&&point.onCurve===false){
-                if(p===glyph.contourEnds[c]){
-                  first=1;
-                  if(p+1 === points.length){
-                    ctx.lineTo(point.x,point.y,points[0].x,points[0].y)
-                  }else{
-                    ctx.moveTo(point.x,point.y);
-                  }
-                }else{
-                  let first = points[p];
-                  let destinationX = (point.x+points[p+1].x)/2;
-                  let destinationY =(point.y+points[p+1].y)/2;
-                  if(points[p+1].onCurve===true){
-                    destinationX = points[p+1].x;
-                    destinationY = points[p+1].y;
-                  }
-                  ctx.quadraticCurveTo(point.x,point.y,destinationX,destinationY);
-
-                }
-              }else{
-                ctx.lineTo(point.x,point.y,point.x,point.y);
-              }
-            }
-
-            if ( p === glyph.contourEnds[c] ) {
-                c += 1;
-                first = 1;
-            }
-
-            p += 1;
-        }
-
-        return true;
-    },
-
-    drawCircs(i,ctx){
-      var glyph = this.readGlyph(i);
-      let points = glyph.points;
-      let p =0;
-      for (var i = 0; i < points.length; i++) {
-        let point = points[i];
-        ctx.moveTo(point.x,point.y);
-        ctx.beginPath();
-        ctx.ellipse(point.x,point.y,10,10,0,.1,0);
-        ctx.stroke();
-      }
-    }
 
 
  }
