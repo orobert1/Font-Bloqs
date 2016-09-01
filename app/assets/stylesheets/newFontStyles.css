@@ -19,13 +19,13 @@ body{
 }
 @-webkit-keyframes anim {
   0%{
-    background-color: rgb(200,240,220);
+    background-color: rgb( 200,240,220 );
   }
   50%{
-    background-color: rgb(240,240,0);
+    background-color: rgb( 240,240,0 );
   }
   100%{
-    background-color: rgb(200,240,220);
+    background-color: rgb( 200,240,220 );
 
   }
 }
@@ -35,7 +35,7 @@ body{
     width:100%;
     color:black;
     margin-left:0px;
-    background-color: rgb(255,255,255);
+    background-color: rgb( 255,255,255 );
   }
   10%{
 
@@ -47,8 +47,8 @@ body{
     width:30px;
   }
   100%{
-    background-color: rgb(200,240,220);
-    color:rgb(200,240,220);
+    background-color: rgb( 200,240,220 );
+    color:rgb( 200,240,220 );
     width:30px;
     border-radius:100%;
     opacity:0;
@@ -66,7 +66,7 @@ body{
   margin-top:80px;
   width:817px;
   height:300px;
-  border:4px dashed rgb(100,100,100);
+  border:4px dashed rgb( 100,100,100 );
   overflow:hidden;
 }
 .scrollable{
@@ -79,13 +79,13 @@ body{
 .glyphIcon{
   float:left;
   padding:5px;
-  border:0px rgb(200,0,0) solid;
+  border:0px rgb( 200,0,0 ) solid;
   width:50px;
   transition:.2s;
 
 }
 .glyphIcon:hover{
-  background-color:rgb(250,200,200);
+  background-color:rgb( 250,200,200 );
   display: inline-block;
   transition:.2s;
   cursor: pointer;
@@ -98,7 +98,7 @@ body{
   font-weight:900;
   font-size:24pt;
   text-align: center;
-  color:rgb(150,150,150);
+  color:rgb( 150,150,150 );
 }
 .spacer{
   width:100%;
@@ -125,7 +125,7 @@ body{
   width:826px;
 }
 .glyphContainer{
-  border: 5px dashed rgb(50,50,50);
+  border: 5px dashed rgb( 50,50,50 );
   width: 400px;
   height: 400px;
   float: left;
@@ -143,7 +143,7 @@ body{
   float:right;
   width:350px;
 }
-.submit{
+.convert{
   width: 400px;
     height: 100px;
     text-align: center;
@@ -152,14 +152,28 @@ body{
     margin-top: 10px;
     font-weight: 900;
     font-size: 20pt;
-    color: rgb(200,200,200);
+    color: rgb( 200,200,200 );
     padding-top: 30px;
     transition:1s;
 }
+.download{
+  color:green;
+}
 
-.submit:hover{
+.convert:hover{
   cursor:pointer;
-  background-color: rgb(255,255,150);
+  background-color: rgb( 255,255,150 );
   transition:1s;
 
+}
+
+.overlay{
+  background-color: black;
+  opacity: .8;
+  position: fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  display: none;
 }

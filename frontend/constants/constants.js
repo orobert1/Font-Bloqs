@@ -1,4 +1,4 @@
 module.exports = {
-  changeCurrentGlyph: "CHANGECURRENTGLYPH",
-  reRenderGlyph: "RERENDERGLYPH"
+ changeCurrentGlyph: "CHANGECURRENTGLYPH",
+ reRenderGlyph: "RERENDERGLYPH"
 }
