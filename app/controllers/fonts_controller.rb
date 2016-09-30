@@ -1,0 +1,2 @@
+class FontsController < ApplicationController
+end

@@ -300,7 +300,6 @@ module.exports = React.createClass( {
   },
 
   setLink(){
-
       return(
         <div className = "overlay">
           <a id="myNewFont" download="myNewFont.ttf" type="application/x-font-ttf">Download</a>
@@ -311,27 +310,40 @@ module.exports = React.createClass( {
   render( ){
    return(
     <div className="content">
-     <div className="container">
-      <div className="scrollable">
-      {
-       this.populate( )
-      }
-     </div>
-     </div>
-     <div className="glyphContainer">
-      <canvas id="editCanvas"></canvas>
-     </div>
-     <div className="rightcont" >
-      <div id="dragTarget" className = "dropTarget" onDragOver = {this.dragEvent} onDrop = {this.drop} onDragLeave={this.dragExit}>
-       <div className= "inner-center-text">
-        Drop a .ttf file here
-       </div>
+      <div className = "chooseFont">
       </div>
-      <div className="convert" onClick={this.submit}>submit</div>
-     </div>
-     {
-       this.setLink()
-     }
+      <div className = "chooseFontShelf">
+        <div className = "shelfTitle">
+          Choose a Font
+        </div>
+        <button className = "font">Benton</button>
+        <button className = "font">Benton</button>
+        <button className = "font">Benton</button>
+        <button className = "font">Benton</button>
+        <button className = "font">Benton</button>
+        <button className = "font">Benton</button>
+      </div>
+      <div className="container">
+        <div className="scrollable">
+          {
+           this.populate( )
+          }
+        </div>
+      </div>
+      <div className="glyphContainer">
+        <canvas id="editCanvas"></canvas>
+      </div>
+      <div className="rightcont" >
+      <div id="dragTarget" className = "dropTarget" onDragOver = {this.dragEvent} onDrop = {this.drop} onDragLeave={this.dragExit}>
+         <div className= "inner-center-text">
+          Drop a .ttf file here
+         </div>
+        </div>
+        <div className="convert" onClick={this.submit}>submit</div>
+      </div>
+       {
+         this.setLink()
+       }
    </div>
     )
   }
