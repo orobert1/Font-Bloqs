@@ -8,7 +8,6 @@ const Download = require('../util/download')
 const GlyphStore = require( '../stores/glyphStore' );
 const actions = require('../actions/glyphActions');
 const Choice = require('./fontChoice');
-var fileSystem = require('file-system');
 Array.prototype.getInt16 = function( array ){
  let first = array.shift( )*256;
  let second = array.shift( );
