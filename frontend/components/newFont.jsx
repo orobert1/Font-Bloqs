@@ -1,4 +1,4 @@
-const React = require( 'react' );
+const React = require( 'react-0.9.0.min' );
 const ReactDOM = require( 'react-dom' );
 const BinaryReader = require( '../util/binary_reader' );
 const TrueTypeFont = require( '../util/true_type_font' );
