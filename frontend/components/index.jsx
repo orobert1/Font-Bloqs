@@ -8,7 +8,7 @@ module.exports = React.createClass( {
    router: React.PropTypes.object.isRequired
   },
  render( ){
-  return( 
+  return(
    <Link to={'/new_font'} >Create A New Font</Link>
    )
  }

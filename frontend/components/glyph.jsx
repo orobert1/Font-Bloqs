@@ -12,7 +12,7 @@ module.exports = React.createClass( {
  },
  render( ){
 
-  return( 
+  return(
    <div>
     <canvas onClick = {this.click} className={"inner-center-text"} className="glyphIcon" id={this.props.glyphId}></canvas>
    </div>
