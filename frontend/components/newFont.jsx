@@ -1,4 +1,4 @@
-const React = require( 'react' );
+const React = require( 'react-min' );
 const ReactDOM = require( 'react-dom' );
 const BinaryReader = require( '../util/binary_reader' );
 const TrueTypeFont = require( '../util/true_type_font' );
@@ -6,6 +6,8 @@ const Glyph = require( '../util/glyph' );
 const ReactGlyph = require( './glyph' );
 const Download = require('../util/download')
 const GlyphStore = require( '../stores/glyphStore' );
+const actions = require('../actions/glyphActions');
+const Choice = require('./fontChoice');
 var fileSystem = require('file-system');
 Array.prototype.getInt16 = function( array ){
  let first = array.shift( )*256;
@@ -14,7 +16,11 @@ Array.prototype.getInt16 = function( array ){
 }
 module.exports = React.createClass( {
   componentDidMount( ){
-   this.list = GlyphStore.addListener( this.change );
+    let func = function(data){
+      this.setState({ fonts: data });
+    }.bind(this);
+    actions.getFonts(func);
+    this.list = GlyphStore.addListener( this.change );
   },
   componentWillUnmount( ){
    GlyphStore.removeListener( this.list );
@@ -83,6 +89,7 @@ module.exports = React.createClass( {
 
   ShowTtfFile( binary ){
    let ttf = new TrueTypeFont( binary );
+   debugger
    this.setState( {ttf: ttf, width:( ttf.xMax - ttf.xMin, ttf.yMax- ttf.yMin ), scale:20/ttf.unitsPerEm} );
    this.findTotalGlyphs( );
 
@@ -192,7 +199,6 @@ module.exports = React.createClass( {
 
   displayLink(output){
     let buffer = new ArrayBuffer(output.length);
-    debugger
     let data = new DataView(buffer);
     for( var i = 0; i < output.length; i++ ){
       data.setUint8(i, output[i]);
@@ -307,6 +313,18 @@ module.exports = React.createClass( {
       );
   },
 
+  getFonts(){
+    let pop = <div></div>;
+    if( this.state.fonts ){
+      pop = this.state.fonts.map(function( font, i ){
+        return(
+          <Choice key = {i} font = {font} callback = {this.ShowTtfFile} ></Choice>
+        )
+      }.bind(this));
+    }
+    return pop;
+  },
+
   render( ){
    return(
     <div className="content">
@@ -316,12 +334,9 @@ module.exports = React.createClass( {
         <div className = "shelfTitle">
           Choose a Font
         </div>
-        <button className = "font">Benton</button>
-        <button className = "font">Benton</button>
-        <button className = "font">Benton</button>
-        <button className = "font">Benton</button>
-        <button className = "font">Benton</button>
-        <button className = "font">Benton</button>
+        {
+          this.getFonts()
+        }
       </div>
       <div className="container">
         <div className="scrollable">
