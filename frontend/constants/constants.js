@@ -1,4 +1,5 @@
 module.exports = {
  changeCurrentGlyph: "CHANGECURRENTGLYPH",
- reRenderGlyph: "RERENDERGLYPH"
+ reRenderGlyph: "RERENDERGLYPH",
+ changeCurrentFont: "changeCurrentFont"
 }

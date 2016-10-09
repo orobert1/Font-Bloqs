@@ -4,6 +4,6 @@ class FontsController < ApplicationController
     str = File.read("#{Rails.root}/app/fonts/benton.ttf")
     file = Base64.encode64(str)
     font = {name: "Benton", file: file}
-    render json: [font];
+    send_data(file, :type => "application/octet-stream")
   end
 end

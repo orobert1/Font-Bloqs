@@ -4,10 +4,12 @@ const BinaryReader = require( '../util/binary_reader' );
 const TrueTypeFont = require( '../util/true_type_font' );
 const Glyph = require( '../util/glyph' );
 const ReactGlyph = require( './glyph' );
-const Download = require('../util/download')
+const Download = require('../util/download');
+const fontActions = require('../actions/fontActions');
 const GlyphStore = require( '../stores/glyphStore' );
 const actions = require('../actions/glyphActions');
 const Choice = require('./fontChoice');
+const fontStore = require( '../stores/fontStore' );
 Array.prototype.getInt16 = function( array ){
  let first = array.shift( )*256;
  let second = array.shift( );
@@ -18,11 +20,20 @@ module.exports = React.createClass( {
     let func = function(data){
       this.setState({ fonts: data });
     }.bind(this);
-    actions.getFonts(func);
+    fontActions.getFonts(func);
+    this.currentFont = fontStore.addListener( this.setTTf );
     this.list = GlyphStore.addListener( this.change );
   },
   componentWillUnmount( ){
    GlyphStore.removeListener( this.list );
+  },
+  setTTf( ttf ){
+    ttf = fontStore.updateCurrentFont().ttf;
+    this.setState({ ttf: ttf, width:( ttf.xMax - ttf.xMin, ttf.yMax- ttf.yMin ), scale:20/ttf.unitsPerEm });
+    window.setTimeout( function(){
+      this.findTotalGlyphs();
+      $('.chooseFontShelf').fadeOut();
+    }.bind(this), 100 );
   },
   change( ){
    let nowGlyph = GlyphStore.getCurrentlySelectedGlyph( );
@@ -53,8 +64,9 @@ module.exports = React.createClass( {
 
 
   findTotalGlyphs( ){
-   let maxp = this.seekTable( 'maxp' );
-   let totalGlyphs = ( maxp[4]*256+maxp[5] );
+   let loca = this.seekTable( 'loca' );
+   debugger
+   let totalGlyphs = ( loca.length / 2 ) - 1;
    this.setState( {length:totalGlyphs} );
    this.createCanvas( );
   },
@@ -88,9 +100,11 @@ module.exports = React.createClass( {
 
   ShowTtfFile( binary ){
    let ttf = new TrueTypeFont( binary );
-   debugger
    this.setState( {ttf: ttf, width:( ttf.xMax - ttf.xMin, ttf.yMax- ttf.yMin ), scale:20/ttf.unitsPerEm} );
-   this.findTotalGlyphs( );
+   window.setTimeout( function(){
+     this.findTotalGlyphs( );
+     $('.chooseFontShelf').fadeOut();
+   }.bind(this), 10)
 
   },
 
@@ -104,7 +118,6 @@ module.exports = React.createClass( {
     e.preventDefault( );
     let reader = new FileReader( );
     reader.readAsArrayBuffer( e.dataTransfer.files[0] );
-
     const readerLoadFunc = function( e ) {
       this.ShowTtfFile( reader.result );
     };
@@ -315,11 +328,10 @@ module.exports = React.createClass( {
   getFonts(){
     let pop = <div></div>;
     if( this.state.fonts ){
-      pop = this.state.fonts.map(function( font, i ){
-        return(
-          <Choice key = {i} font = {font} callback = {this.ShowTtfFile} ></Choice>
-        )
-      }.bind(this));
+      let font = this.state.fonts;
+      return(
+        <Choice font = {font} callback = {this.ShowTtfFile} ></Choice>
+      )
     }
     return pop;
   },
@@ -327,8 +339,7 @@ module.exports = React.createClass( {
   render( ){
    return(
     <div className="content">
-      <div className = "chooseFont">
-      </div>
+
       <div className = "chooseFontShelf">
         <div className = "shelfTitle">
           Choose a Font
