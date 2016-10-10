@@ -75,11 +75,13 @@ button{
   overflow:hidden;
 }
 .scrollable{
-  height:100%;
+  height:30%;
   width:100%;
+  opacity: 0;
   overflow-y: scroll;
   padding: 40px;
-  padding-bottom: 0px;
+  padding-bottom: 200px;
+  transition: 3s;
 }
 .glyphIcon{
   float:left;
@@ -168,7 +170,7 @@ button{
 .convert:hover{
   cursor:pointer;
   background-color: rgb( 255,255,150 );
-  transition:1s;
+  transition:1.5s;
 
 }
 .chooseFont{
@@ -190,6 +192,7 @@ button{
     background-color: white;
     z-index: 1000;
     box-shadow: 4px 1px 10px rgba(0,0,0,.5);
+    transition: .8s cubic-bezier(0,0,.1,1);
 }
 .shelfTitle {
     margin-left: 10%;

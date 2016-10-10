@@ -32,7 +32,9 @@ module.exports = React.createClass( {
     this.setState({ ttf: ttf, width:( ttf.xMax - ttf.xMin, ttf.yMax- ttf.yMin ), scale:20/ttf.unitsPerEm });
     window.setTimeout( function(){
       this.findTotalGlyphs();
-      $('.chooseFontShelf').fadeOut();
+      $('.chooseFontShelf').css({ left: "-50%"});
+      $('.scrollable').css({ opacity: 1});
+
     }.bind(this), 100 );
   },
   change( ){
