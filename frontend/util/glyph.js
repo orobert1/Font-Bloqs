@@ -15,12 +15,24 @@ const Actions = require( '../actions/glyphActions' );
     this.Glyph.instructionsEnd);
     this.data = ttf.file.data;
     this.points = this.Glyph.points;
+    this.counter = 0
+    this.update = false;
+    this.count();
     this.seekTable( 'loca' );
     this.findPointOffset();
     this.seekTable( 'glyf' );
     this.seekPointOffset();
+  }
 
-
+  Glyph.prototype.count = function(){
+    this.counter++;
+    if(this.counter > 10){
+      this.update = true;
+      this.counter = 0;
+    }else{
+      this.update = false;
+    }
+    window.setTimeout(this.count.bind(this), 10);
   }
 
   Glyph.prototype.findNewFlags = function(){
@@ -77,6 +89,7 @@ const Actions = require( '../actions/glyphActions' );
   }
 
   Glyph.prototype.render = function( canvasId,res,options ){
+    this.res = res;
     var canvas = document.getElementById( canvasId );
     canvas.height = res;
     canvas.width = res;
@@ -87,20 +100,13 @@ const Actions = require( '../actions/glyphActions' );
     ctx.beginPath();
     if( options.showMax ){
       ctx.moveTo( 0,options.yMax );
-      ctx.strokeStyle="red";
       ctx.lineWidth=5;
-      ctx.moveTo( -200,this.Glyph.yMax );
-      ctx.lineTo( 1200,this.Glyph.yMax );
-      ctx.moveTo( -200,this.Glyph.yMin );
-      ctx.lineTo( 1200,this.Glyph.yMin );
-      ctx.stroke();
-      ctx.strokeStyle="blue";
-      ctx.beginPath();
-      ctx.moveTo( -200,options.ascender );
-      ctx.lineTo( 1200,options.ascender );
-      ctx.moveTo( -200,options.descender );
-      ctx.lineTo( 1200,options.descender );
-      ctx.stroke();
+      ctx.shadowColor = '#999';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 5;
+      ctx.shadowOffsetY = 5;
+      ctx.fillStyle = "white";
+      ctx.fill();
     }
     if( this.drawGlyph( this.glyphNum,ctx ) ){
       ctx.fill();
@@ -127,8 +133,8 @@ const Actions = require( '../actions/glyphActions' );
       let div = document.createElement( "div" );
       div.className = "controls";
       div.draggable = "true";
-      div.style.top=( ( -900+point.y )* -scale *( res/25 ) )-5+'px';
-      div.style.left=( ( 200+point.x )* scale *( res/25 ) )-5+'px';
+      div.style.top=( ( -900+point.y ) * -scale * ( res/25 ) )-5+'px';
+      div.style.left=( ( 200+point.x ) * scale * ( res/25 ) )-5+'px';
       div.attributes["onDrag"] = this.dragPoint.bind( this, point, canvas );
       $( '.glyphContainer' ).append( div );
       $( '.controls' ).on( "drag", function( e ){
@@ -145,16 +151,16 @@ const Actions = require( '../actions/glyphActions' );
     };
   }
   Glyph.prototype.dragPoint = function ( point, canvas, evt, div ){
-    let mouseXY =getMousePos( canvas, evt );
-    if( evt.clientX!== 0 &&evt.clientY!== 0 ){
+    let mouseXY = getMousePos( canvas, evt );
+    if( this.update === true ){
+      if( evt.clientX!== 0 && evt.clientY!== 0 ){
       div.style.top = mouseXY.y-5+"px";
       div.style.left = mouseXY.x-5+"px";
-      point.x = 3.0902255639097747*mouseXY.x-205;
-      point.y = -3.0902255639097747*mouseXY.y+905;
+      point.x = ( this.scale * ( this.res / 5.7 ) ) * ( mouseXY.x )-205;
+      point.y = - ( this.res / 285 ) * ( mouseXY.y ) + 905;
       Actions.updateCurrentGlyph();
-    } else{
-
     }
+  }
   }
   Glyph.prototype.convertToBinary = function(){
     let result = [];

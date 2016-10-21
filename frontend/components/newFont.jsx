@@ -41,7 +41,7 @@ module.exports = React.createClass( {
    let nowGlyph = GlyphStore.getCurrentlySelectedGlyph( );
    if( nowGlyph === this.state.currentGlyph ){
     let options = {showMax:true, ascender: this.state.ascender, descender:this.state.descender};
-    this.state.glyphs[nowGlyph.substring( 5 )].render( "editCanvas", 400, options );
+    this.state.glyphs[nowGlyph.substring( 5 )].render( "editCanvas", 600, options );
    }else{
     this.setState( { currentGlyph:nowGlyph } );
     this.updateCurrentGlyph( nowGlyph );
@@ -50,7 +50,7 @@ module.exports = React.createClass( {
   updateCurrentGlyph( nowGlyph ){
    let id = Number( nowGlyph.substring( 5 ) )
    let options = {showMax:true, ascender: this.state.ascender, descender:this.state.descender, newGlyph:true};
-   this.state.glyphs[id].render( "editCanvas", 400, options );
+   this.state.glyphs[id].render( "editCanvas", 600, options );
   },
   dragEvent( e ){
    e.preventDefault( );
