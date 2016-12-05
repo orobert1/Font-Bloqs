@@ -16,8 +16,8 @@
 !/log/.keep
 /tmp
 /node_modules
-/public
-\!public/assets
+/public/*
+!/public/assets
 /.byebug_history
 /.DS_Store
 /app/assets/javascripts/bundle.js
