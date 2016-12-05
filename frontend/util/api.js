@@ -4,7 +4,7 @@ module.exports = {
       url: "fonts",
       method: "GET",
       error(err){
-        debugger
+
       },
       success(data){
         func( data );
