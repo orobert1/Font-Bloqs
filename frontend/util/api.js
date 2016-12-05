@@ -3,6 +3,9 @@ module.exports = {
     $.ajax({
       url: "fonts",
       method: "GET",
+      error(err){
+        debugger
+      },
       success(data){
         func( data );
       }

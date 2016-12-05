@@ -67,7 +67,6 @@ module.exports = React.createClass( {
 
   findTotalGlyphs( ){
    let loca = this.seekTable( 'loca' );
-   debugger
    let totalGlyphs = ( loca.length / 2 ) - 1;
    this.setState( {length:totalGlyphs} );
    this.createCanvas( );

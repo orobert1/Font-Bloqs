@@ -102,10 +102,10 @@ const Actions = require( '../actions/glyphActions' );
       ctx.moveTo( 0,options.yMax );
       ctx.lineWidth=5;
       ctx.shadowColor = '#999';
-      ctx.shadowBlur = 8;
+      ctx.shadowBlur = 20;
       ctx.shadowOffsetX = 5;
       ctx.shadowOffsetY = 5;
-      ctx.fillStyle = "white";
+      ctx.fillStyle = "black";
       ctx.fill();
     }
     if( this.drawGlyph( this.glyphNum,ctx ) ){
@@ -123,7 +123,6 @@ const Actions = require( '../actions/glyphActions' );
     var points = this.points;
     let p =0;
     $( '.glyphContainer' ).children( '.controls' ).remove();
-
     for ( var i = 0; i < points.length; i ++ ) {
       let point = points[i];
       ctx.moveTo( point.x,point.y );
@@ -133,8 +132,8 @@ const Actions = require( '../actions/glyphActions' );
       let div = document.createElement( "div" );
       div.className = "controls";
       div.draggable = "true";
-      div.style.top=( ( -900+point.y ) * -scale * ( res/25 ) )-5+'px';
-      div.style.left=( ( 200+point.x ) * scale * ( res/25 ) )-5+'px';
+      div.style.top=( ( -1062+point.y ) * -scale * ( res/25 ) )-5+'px';
+      div.style.left=( ( 615+point.x ) * scale * ( res/25 ) )-5+'px';
       div.attributes["onDrag"] = this.dragPoint.bind( this, point, canvas );
       $( '.glyphContainer' ).append( div );
       $( '.controls' ).on( "drag", function( e ){
@@ -156,8 +155,8 @@ const Actions = require( '../actions/glyphActions' );
       if( evt.clientX!== 0 && evt.clientY!== 0 ){
       div.style.top = mouseXY.y-5+"px";
       div.style.left = mouseXY.x-5+"px";
-      point.x = ( this.scale * ( this.res / 5.7 ) ) * ( mouseXY.x )-205;
-      point.y = - ( this.res / 285 ) * ( mouseXY.y ) + 905;
+      point.x = ( this.scale * ( this.res / 5.7 ) ) * ( mouseXY.x )-620;
+      point.y = - ( this.res / 285 ) * ( mouseXY.y ) + 1067;
       Actions.updateCurrentGlyph();
     }
   }

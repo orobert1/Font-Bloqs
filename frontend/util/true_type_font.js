@@ -1,11 +1,14 @@
 const BinaryReader = require( './binary_reader' );
 const assert = require( './assert' );
+const Glyph = require( './glyph' );
 function TrueTypeFont( arrayBuffer )
 {
     this.file = new BinaryReader( arrayBuffer );
     this.glyphOffsets = [];
     this.tables = this.readOffsetTables( this.file );
     this.readHeadTable( this.file );
+    this.getTotalGlyphs();
+
 }
 
 TrueTypeFont.prototype = {
@@ -206,6 +209,22 @@ TrueTypeFont.prototype = {
 
        readCoords( "x", X_IS_BYTE, X_DELTA, glyph.xMin, glyph.xMax );
        readCoords( "y", Y_IS_BYTE, Y_DELTA, glyph.yMin, glyph.yMax );
+   },
+   seekTable( tableName ){
+     let table = this.tables[tableName];
+     let offset = table.offset;
+     let length = table.length;
+     let data = this.file.data;
+     let dataChunk = data.slice( offset, offset + length );
+     return dataChunk;
+   },
+
+   getTotalGlyphs: function( ) {
+
+     let loca = this.seekTable( 'loca' );
+     this.totalGlyphs = ( loca.length / 2 ) - 1;
+     this.glyphs = [];
+     
    }
 
 

@@ -5,7 +5,7 @@ const newFont = require( './components/newFont' );
 const Index = require( './components/index' );
 const App = React.createClass( {
  render( ){
-  return( 
+  return(
    <div>
     {this.props.children}
    </div>
@@ -13,7 +13,7 @@ const App = React.createClass( {
  }
 } );
 
-const routes = ( 
+const routes = (
  <Route path='/' component={App}>
   <IndexRoute component={Index}/>
   <Route path='/new_font' component={newFont}/>

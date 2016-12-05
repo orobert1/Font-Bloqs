@@ -5,20 +5,20 @@ const React = require( 'react' );
 const ReactDOM = require( 'react-dom' );
 const fontStore = new Store( AppDispatcher );
 
-let ttfFile = { ttf: "" };
+fontStore.ttfFile = [];
 
-fontStore.updateCurrentFont = function(){
-  return ttfFile;
+fontStore.getCurrentFonts = function(){
+  return this.ttfFile;
 }
 
-fontStore.setCurrentFont = function( ttf ){
-  ttfFile.ttf = ttf;
+fontStore.setCurrentFonts = function( ttf ){
+  this.ttfFile = ttf;
 }
 
 fontStore.__onDispatch = function( payload ){
   switch( payload.actionType ){
     case Constants.changeCurrentFont:
-    this.setCurrentFont( payload.ttf );
+    this.setCurrentFonts( payload.ttf );
     this.__emitChange();
   }
 }

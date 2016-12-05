@@ -3,9 +3,15 @@ const Constants = require( '../constants/constants' );
 const api = require('../util/api');
 
 module.exports = {
-  getFonts ( func ){
-     api.getChoiceFonts( func );
+  getFonts (){
+     api.getChoiceFonts( this.selectFont );
   },
+
+  getFont( id ){
+
+  },
+
+
   selectFont: function( ttf ){
     Dispatcher.dispatch({
       actionType: Constants.changeCurrentFont,

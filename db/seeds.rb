@@ -5,3 +5,7 @@
 #
 #  cities = City.create( [{ name: 'Chicago' }, { name: 'Copenhagen' }] )
 #  Mayor.create( name: 'Emanuel', city: cities.first )
+
+Font.create({path: "#{Rails.root}/app/assets/fonts/AntiqueCondensedTwo.ttf", name: "Antique"});
+Font.create({path: "#{Rails.root}/app/assets/fonts/ApresRE-Bold.ttf", name: "ApresRE"});
+Font.create({path: "#{Rails.root}/app/assets/fonts/benton.ttf", name: "Benton"});

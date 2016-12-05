@@ -7,13 +7,20 @@ module.exports = React.createClass( {
   let options={};
   this.props.glyph.render( this.props.glyphId,50,options );
  },
- click( ){
-  Actions.changeCurrentGlyph( this.props.glyphId,50 );
- },
- render( ){
+ componentWillReceiveProps(newProps){
+   let options={};
 
+   this.props.glyph.render( this.props.glyphId,50,options );
+ },
+
+ click( ){
+  $('html, body').animate({scrollTop: $("#glyphCanvas").offset().top}, 400);
+  Actions.changeCurrentGlyph( this.props.ind, 50 );
+ },
+
+ render( ){
   return(
-   <div>
+   <div className = "glyphIcon">
     <canvas onClick = {this.click} className={"inner-center-text"} className="glyphIcon" id={this.props.glyphId}></canvas>
    </div>
    )
