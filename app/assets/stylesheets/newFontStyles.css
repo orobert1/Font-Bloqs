@@ -4,6 +4,19 @@
     font-family: "F37";
     src: url("1.otf");
 }
+@font-face {
+    font-family: "Super";
+    src: url("Graphik-Super.otf");
+}
+@font-face {
+    font-family: "Light";
+    src: url("Graphik-Thin.otf");
+}
+
+@font-face {
+    font-family: "Medium";
+    src: url("Graphik-Medium.otf");
+}
 body{
   font-family:'Helvetica';
   overflow-x:hidden;
@@ -212,6 +225,7 @@ body{
     margin-top: 80px;
     margin-bottom: 40px;
     font-size: 36pt;
+    font-family: "Super";
     float: left;
     width: 500px;
 }
@@ -230,7 +244,17 @@ body{
   transition: .8s;
 }
 #cover{
+  position: fixed;
+  top:0px;
+  left:0px;
+  z-index: 1000;
   background-color: white;
+}
+.inside{
+  float: left;
+  width: 100%;
+  height:100%;
+  position: relative;
 }
 .shutter{
   box-shadow: 5px 0px 15px 5px rgba(0,0,0,.15);
@@ -239,6 +263,18 @@ body{
   position: relative;
   float:left;
 }
+#linkToChoose{
+  font-family: "Light";
+  white-space: nowrap;
+  font-size: 24pt;
+  letter-spacing: 10px;
+  -webkit-transform: rotate(-90deg);
+}
+#linkToChoose:hover{
+  cursor: pointer;
+  color: yellow;
+}
+
 .cloud{
   position: absolute;
   top:0px;
@@ -261,7 +297,9 @@ body{
   font-size: 16pt;
   max-width: 200px;
   max-height: 200px;
+  text-align: center;
   transition: .4s;
+  font-family: "Light";
   padding:10px;
 }
 
@@ -296,6 +334,8 @@ body{
   font-weight: 200;
   font-size: 36pt;
   z-index: 1;
+  font-family: "Medium";
+  margin-left: 240px;
   top: 0px;
   height: 200px;
   left: -100px;
@@ -305,6 +345,7 @@ body{
 .quote{
   float: left;
   position: relative;
+  height: 400px;
   background-color: white;
   position: relative;
 }
@@ -317,8 +358,8 @@ body{
   background-color: white;
   width:100%;
   float:left;
-  box-shadow: 10px 10px 20px rgba(0,0,0,.2);
-  height: 100px;
+  box-shadow: 10px 10px 40px rgba(0,0,0,.2);
+  height: 20px;
 }
 
 .glyphCanvas{
@@ -327,11 +368,12 @@ body{
 
 #typePoem{
   opacity: 0;
-  font-size: 12pt;
+  font-size: 8pt;
   font-weight: 100;
+  margin-top: 150px;
   letter-spacing: 2px;
+  font-family: "Light";
   line-height: 1.6em;
-  font-family: Helvetica;
 }
 .g{
   position: absolute;
@@ -389,4 +431,25 @@ body{
   width:100%;
   height:100%;
   display: none;
+}
+
+.coverVideo{
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+#title{
+  position: absolute;
+  text-align: center;
+  font-family: "Super";
+  opacity: 0;
+  color: rgb(55,55,55)
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border: 0px;
+  overflow: hidden;
 }

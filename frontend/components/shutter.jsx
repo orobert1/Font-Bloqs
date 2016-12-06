@@ -4,6 +4,7 @@ const Cloud = require('./cloud');
 const Text = require('./text');
 const Glyph = require( '../util/glyph' );
 const ReactGlyph = require( './glyph' );
+const LinkToChoose = require('./linktochoose');
 
 
 
@@ -16,7 +17,7 @@ module.exports = React.createClass({
     }
     div.className = "shutter";
     div.style.height = window.innerHeight + "px";
-    div.style.width = this.props.grid.squareWidth + this.props.grid.gutterX + "px";
+    div.style.width = "200px";
     div.style.marginLeft = 0 - this.props.gutterX + "px";
     div.style.zIndex = 1000 - this.props.num;
   },
@@ -47,7 +48,11 @@ module.exports = React.createClass({
         for (var i = 0; i < total; i++) {
           let glyph = new Glyph( i, this.props.font, scale, total );
           result.push( <ReactGlyph key={i} ind = {i} glyph={glyph} glyphId={"Glyph"+i} ></ReactGlyph> )
-        }
+      }
+      }else{
+        return(
+          <LinkToChoose></LinkToChoose>
+        )
       }
     }
     return result;

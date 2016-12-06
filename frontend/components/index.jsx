@@ -27,6 +27,9 @@ module.exports = React.createClass( {
     window.addEventListener( "scroll", this.state.window.run.bind( this.state.window ) );
     this.list = fontStore.addListener( this.__change );
     fontActions.getFonts();
+    let space = document.getElementById("space");
+    space.style.height = window.innerHeight + "px";
+    space.style.width = window.innerWidth + "px";
 
   },
   __change(){
@@ -51,7 +54,7 @@ module.exports = React.createClass( {
   generateGlyphs( ttf ){
     let result = [];
     for (var i = 0; i < ttf.totalGlyphs; i++) {
-      let glyph = new Glyph( i, ttf, .02, ttf.totalGlyphs );
+      let glyph = new Glyph( i, ttf, .02, ttf.totaltGlyphs );
       result.push( glyph );
     }
     this.setState({ glyphs: result });
@@ -61,6 +64,7 @@ module.exports = React.createClass( {
   return(
     <div>
       <Head font = {this.state.selectedFont} />
+      <div className = "inside" id = "space"/>
       <Cover win = {this.state.window} grid = {new Grid}></Cover>
       <Quote win = {this.state.window} />
       <Instructions callback = { this.__changeSelectedFont } fonts = {this.state.fonts} win = {this.state.window} />

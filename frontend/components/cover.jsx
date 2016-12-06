@@ -2,58 +2,45 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Grid = require('../util/grid.js');
 const Shutter = require('./shutter');
-
+const Vimeo = require('react-vimeo');
 
 module.exports = React.createClass({
   componentDidMount(){
     let cover = document.getElementById("cover");
+    let title = document.getElementById("title");
+
     cover.style.height = window.innerHeight + "px";
     cover.style.width = window.innerWidth + "px";
     cover.style.overflow = "hidden";
+
+    let grid = new Grid();
+    window.setTimeout( function(){
+      document.getElementById("title").style.transition = "2s";
+      document.getElementById("title").style.opacity = 1;
+    }, 1000);
+    grid.alignLeft( title, 15 );
+    grid.alignTop( title, 10 );
+
+    window.setInterval(function(){
+      let cover = document.getElementById("cover");
+        if( window.scrollY < window.innerHeight ){
+          cover.style.height = window.innerHeight - window.scrollY + "px";
+        }else{
+          cover.style.height = "0px";
+        }
+    }, 30);
+
   },
 
-  createShutters(){
-    let shutters = new Array(30);
-    for (var i = 0; i < shutters.length; i++) {
-      shutters[i] = this.props.grid;
-    }
-    return shutters.map(
-      function( el, index ){
-        let text = false;
-        let cloud = false;
-        switch(index){
-          case 0:
-            cloud = { top: 3, seed: 4, index: index, height: 8};
-            break;
-          case 9:
-            cloud = { top: 0, seed: 1, index: index, height: 10};
-            break;
-          case 10:
-            text = { top: 6, text: "Font", index: index, size: 120, direction: "left"}
-            break;
-          case 16:
-            cloud = { top: 13, seed: 2, index: index, height: 10};
-            break;
-          case 15:
-            text = { top: 11, text: "Bloqs", index: index, size: 120, direction: "right"}
-            break;
-        }
-        return <Shutter cloud = { cloud }
-          text = { text }
-           grid = {el}
-           num = {index}
-           key = {index}
-           id = {"shutter" + index} ></Shutter>
-      }
-    )
-  },
+
 
   render(){
     return(
       <div id = "cover">
-        {
-          this.createShutters()
-        }
+        <div className = "inside">
+          <div id = "title"> Font <br></br> Bloqs</div>
+          <iframe src="http://oscarrobert.com/background/"></iframe>
+        </div>
       </div>
     )
   }

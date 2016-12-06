@@ -22,9 +22,8 @@ module.exports = React.createClass({
     instructions.style.width = window.innerWidth + "px";
     instructions.style.height = window.innerHeight + "px";
     let grid = new Grid();
-    grid.alignTop( fTitle, 6 );
-    grid.picWidth( fTitle, 5 );
-    grid.alignLeft( fTitle, 10 );
+    grid.alignTop( fTitle, 2 );
+    grid.picWidth( fTitle, 10 );
     grid.alignTop( buttonContainer, 12 );
     grid.alignLeft( buttonContainer, 10 );
     grid.picWidth( buttonContainer, 5 );
@@ -52,9 +51,8 @@ module.exports = React.createClass({
   render(){
     return(
       <div className = "instructions" id = "instructions">
-        <div className = "buffer" ></div>
-        <Cloud cloud = { {top: 4, seed: 2, index: 13, height: 14}} />
-        <div className = "fontChoicesTitle" id = "fontChoicesTitle"> Choose a Typeface to edit
+        <div className = "buffer"/>
+        <div className = "fontChoicesTitle" id = "fontChoicesTitle"> Choose a Typeface
           {
             this.getFonts()
           }
