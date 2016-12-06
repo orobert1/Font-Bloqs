@@ -7,6 +7,7 @@ const GlyphStore = require( '../stores/glyphStore' );
 const fontActions = require('../actions/fontActions');
 const Choice = require('./fontChoice');
 const FontButton = require('./fontButton');
+const $ = require('jquery');
 
 
 
@@ -31,6 +32,15 @@ module.exports = React.createClass({
       el.style.transition = "1s";
       el.style.left = "0px";
       el.style.opacity = 1;
+      let children = $(el).children();
+      for (var i = 0; i < children.length; i++) {
+        let child = children[i];
+        window.setTimeout( function(){
+          child.style.transition = "2s";
+          child.style.marginTop = "20px";
+          child.style.opacity = 1;
+        }, i*200 );
+      }
     });
 
   },

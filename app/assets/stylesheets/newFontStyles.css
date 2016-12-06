@@ -266,10 +266,11 @@ body{
 #linkToChoose{
   font-family: "Light";
   white-space: nowrap;
-  font-size: 24pt;
-  letter-spacing: 10px;
-  -webkit-transform: rotate(-90deg);
+  font-size: 18pt;
+  letter-spacing: 5px;
+  -webkit-transform: rotate(90deg);
 }
+
 #linkToChoose:hover{
   cursor: pointer;
   color: yellow;
@@ -293,14 +294,17 @@ body{
 }
 
 .fontButton{
-  margin-left: 100px;
   font-size: 16pt;
   max-width: 200px;
   max-height: 200px;
-  text-align: center;
+  background-color: none;
+  opacity: 0;
+  text-align: right;
+  line-height: 1.3em;
+  margin-top: 0px;
   transition: .4s;
   font-family: "Light";
-  padding:10px;
+  padding:0px;
 }
 
 .fontButton:hover{
@@ -334,10 +338,12 @@ body{
   font-weight: 200;
   font-size: 36pt;
   z-index: 1;
-  font-family: "Medium";
   margin-left: 240px;
   top: 0px;
-  height: 200px;
+  column-count: 4;
+  column-width: 150px;
+  font-family: "Medium";
+  height: 600px;
   left: -100px;
   opacity: 0;
 

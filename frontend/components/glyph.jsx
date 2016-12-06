@@ -9,7 +9,6 @@ module.exports = React.createClass( {
  },
  componentWillReceiveProps(newProps){
    let options={};
-
    this.props.glyph.render( this.props.glyphId,50,options );
  },
 
