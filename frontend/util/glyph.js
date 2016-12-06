@@ -132,7 +132,7 @@ const Actions = require( '../actions/glyphActions' );
       let div = document.createElement( "div" );
       div.className = "controls";
       div.draggable = "true";
-      div.style.top=( ( -1062+point.y ) * -scale * ( res/25 ) )-5+'px';
+      div.style.top=( ( -902+point.y ) * -scale * ( res/25 ) )-5+'px';
       div.style.left=( ( 615+point.x ) * scale * ( res/25 ) )-5+'px';
       div.attributes["onDrag"] = this.dragPoint.bind( this, point, canvas );
       $( '.glyphContainer' ).append( div );
@@ -145,7 +145,7 @@ const Actions = require( '../actions/glyphActions' );
   function getMousePos( canvas, evt ) {
     var rect = canvas.getBoundingClientRect();
     return {
-      x: evt.clientX - rect.left,
+      x: evt.clientX - rect.left + 200,
       y: evt.clientY - rect.top
     };
   }
@@ -155,8 +155,8 @@ const Actions = require( '../actions/glyphActions' );
       if( evt.clientX!== 0 && evt.clientY!== 0 ){
       div.style.top = mouseXY.y-5+"px";
       div.style.left = mouseXY.x-5+"px";
-      point.x = ( this.scale * ( this.res / 5.7 ) ) * ( mouseXY.x )-620;
-      point.y = - ( this.res / 285 ) * ( mouseXY.y ) + 1067;
+      point.x = ( this.scale * ( this.res / 5.7 ) ) * ( mouseXY.x )-615;
+      point.y = - ( this.res / 285 ) * ( mouseXY.y ) + 902;
       Actions.updateCurrentGlyph();
     }
   }
