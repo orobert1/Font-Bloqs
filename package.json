@@ -37,7 +37,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "4.6.2",
+    "node": "4.6.0",
     "npm": "2.15.9"
   },
   "devDependencies": {

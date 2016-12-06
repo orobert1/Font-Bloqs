@@ -100,7 +100,7 @@ const Actions = require( '../actions/glyphActions' );
     ctx.beginPath();
     if( options.showMax ){
       ctx.moveTo( 0,options.yMax );
-      ctx.lineWidth=5;
+      ctx.lineWidth = 5;
       ctx.shadowColor = '#999';
       ctx.shadowBlur = 20;
       ctx.shadowOffsetX = 5;
