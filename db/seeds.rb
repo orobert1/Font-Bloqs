@@ -22,7 +22,6 @@ Font.create({path: "#{Rails.root}/app/assets/fonts/DIN Next LT W23 Heavy.ttf", n
 Font.create({path: "#{Rails.root}/app/assets/fonts/DIN Next LT W23 Medium.ttf", name: "DIN Next LT W23 Medium"});
 Font.create({path: "#{Rails.root}/app/assets/fonts/DIN Next LT W23 Regular.ttf", name: "DIN Next LT W23 Regular"});
 Font.create({path: "#{Rails.root}/app/assets/fonts/DIN Next LT W23 Light.ttf", name: "DIN Next LT W23 Light"});
-Font.create({path: "#{Rails.root}/app/assets/fonts/DIN Next LT W23 Ultra Light.ttf", name: "DIN Next LT W23 Ultra Light"});
 
 Font.create({path: "#{Rails.root}/app/assets/fonts/Linotype Univers 820 Black Condensed.ttf", name: "Linotype Univers 820 Black Condensed"});
 Font.create({path: "#{Rails.root}/app/assets/fonts/Linotype Univers 620 Bold Condensed.ttf", name: "Linotype Univers 620 Bold Condensed"});

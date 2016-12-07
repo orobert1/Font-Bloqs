@@ -6,10 +6,22 @@ module.exports = React.createClass( {
  componentDidMount( ){
   let options={};
   this.props.glyph.render( this.props.glyphId,50,options );
+  let icon = document.getElementById( this.props.glyphId );
+  icon.style.opacity = 0;
+  window.setTimeout( function(){
+    icon.style.transition = ".4s";
+    icon.style.opacity = 1;
+  }, this.props.ind * 100 );
  },
  componentWillReceiveProps(newProps){
    let options={};
    this.props.glyph.render( this.props.glyphId,50,options );
+   let icon = document.getElementById( this.props.glyphId );
+   icon.style.opacity = 0;
+   window.setTimeout( function(){
+     icon.style.transition = ".4s";
+     icon.style.opacity = 1;
+   }, this.props.ind * 100 );
  },
 
  click( ){
