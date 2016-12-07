@@ -27,12 +27,13 @@ module.exports = React.createClass({
     grid.alignTop( fTitle, 2 );
     grid.picWidth( fTitle, 10 );
 
-    grid.picWidth( currentFont, 10 );
+    grid.picWidth( currentFont, 6 );
     grid.alignTop( currentFont, 2 );
-    grid.alignLeft( currentFont, 15 );
+    grid.alignLeft( currentFont, 22 );
 
-    grid.picWidth( quickBrown, 18 );
-    grid.alignTop( quickBrown, 10 );
+    grid.picWidth( quickBrown, 6 );
+    grid.alignLeft( quickBrown, 22 );
+    grid.alignTop( quickBrown, 12 );
 
 
     this.props.win.registerElement( fTitle, function( el ){
