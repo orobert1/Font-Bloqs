@@ -91,6 +91,7 @@ button{
   margin-top:80px;
   width:817px;
   height:300px;
+
   border:4px dashed rgb( 100,100,100 );
   overflow:hidden;
 }
@@ -144,11 +145,12 @@ fullContainer{
   border-radius: 10px;
 }
 .controls{
-  background-color: white;
+  background-color: yellow;
   width:10px;
   height:10px;
   border-radius:100%;
   position: absolute;
+  opacity: .7;
 }
 .controls:hover{
   cursor: pointer;
@@ -278,9 +280,33 @@ body{
 
 }
 
+#currentFont{
+  font-family: "Medium";
+  position: relative;
+  margin-left: 600px;
+  margin-top: 100px;
+  font-size: 8pt;
+  text-align: right;
+  transition: 2s;
+}
+
 #linkToChoose:hover{
   cursor: pointer;
   color: yellow;
+}
+
+#quickBrown{
+  font-family: "Medium";
+  letter-spacing: 1px;
+  position: relative;
+  text-align: left;
+  margin-top: 100px;
+  padding-left: 250px;
+  opacity: 0;
+  font-size: 50pt;
+  line-height: 1.6em;
+  color: rgb(230,230,230);
+  transition: 2s;
 }
 
 .cloud{

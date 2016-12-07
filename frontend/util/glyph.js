@@ -101,10 +101,6 @@ const Actions = require( '../actions/glyphActions' );
     if( options.showMax ){
       ctx.moveTo( 0,options.yMax );
       ctx.lineWidth = 5;
-      ctx.shadowColor = '#999';
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
       ctx.fillStyle = "black";
       ctx.fill();
     }
@@ -126,9 +122,6 @@ const Actions = require( '../actions/glyphActions' );
     for ( var i = 0; i < points.length; i ++ ) {
       let point = points[i];
       ctx.moveTo( point.x,point.y );
-      ctx.beginPath();
-      ctx.ellipse( point.x,point.y,10,10,0,.1,0 );
-      ctx.stroke();
       let div = document.createElement( "div" );
       div.className = "controls";
       div.draggable = "true";

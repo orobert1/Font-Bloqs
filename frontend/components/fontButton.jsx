@@ -11,11 +11,11 @@ module.exports = React.createClass({
   alertAuthorities(){
     let head = document.getElementById("shutter31");
     head.style.width = "200px";
-    console.log("alert Authorities");
     let a = atob(this.props.font.file);
     let buffer = base64.convert( a );
     let ttf = new TrueTypeFont( buffer );
     this.props.callback( ttf );
+    this.props.changeCurrentFont( this.props.font.name, buffer );
   },
 
   render(){

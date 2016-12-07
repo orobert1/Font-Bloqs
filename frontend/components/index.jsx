@@ -67,7 +67,7 @@ module.exports = React.createClass( {
       <div className = "inside" id = "space"/>
       <Cover win = {this.state.window} grid = {new Grid}></Cover>
       <Quote win = {this.state.window} />
-      <Instructions callback = { this.__changeSelectedFont } fonts = {this.state.fonts} win = {this.state.window} />
+      <Instructions font = {this.state.selectedFont} callback = { this.__changeSelectedFont } fonts = {this.state.fonts} win = {this.state.window} />
       <Board glyphs = { this.state.glyphs } font = {this.state.selectedFont} />
     </div>
    )

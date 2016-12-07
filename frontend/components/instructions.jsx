@@ -13,21 +13,28 @@ const $ = require('jquery');
 
 module.exports = React.createClass({
   getInitialState(){
-    return({ fonts: []});
+    return({ fonts: [], font: "", quickBrown: ""});
   },
   componentWillReceiveProps(){
     let quote =  document.getElementById("instructions");
     let fTitle =  document.getElementById("fontChoicesTitle");
-    let buttonContainer =  document.getElementById("buttonContainer");
+    let currentFont = document.getElementById("currentFont");
+    let quickBrown = document.getElementById("quickBrown");
 
     instructions.style.width = window.innerWidth + "px";
     instructions.style.height = window.innerHeight + "px";
     let grid = new Grid();
     grid.alignTop( fTitle, 2 );
     grid.picWidth( fTitle, 10 );
-    grid.alignTop( buttonContainer, 12 );
-    grid.alignLeft( buttonContainer, 10 );
-    grid.picWidth( buttonContainer, 5 );
+
+    grid.picWidth( currentFont, 10 );
+    grid.alignTop( currentFont, 2 );
+    grid.alignLeft( currentFont, 15 );
+
+    grid.picWidth( quickBrown, 18 );
+    grid.alignTop( quickBrown, 10 );
+
+
     this.props.win.registerElement( fTitle, function( el ){
       el.style.transition = "1s";
       el.style.left = "0px";
@@ -51,12 +58,34 @@ module.exports = React.createClass({
       return this.props.fonts.map(
         function( el, index ){
           return (
-            <FontButton callback = { this.props.callback } font = {el} key = {index} index = {index} />
+            <FontButton callback = { this.props.callback }
+            changeCurrentFont = { this.changeCurrentFont }
+            font = {el} key = {index} index = {index} />
           )
         }.bind( this )
       );
     }
   },
+
+  changeCurrentFont( fontName, arrayBuffer ){
+    var newFont = new FontFace( fontName, arrayBuffer );
+    newFont.load().then(function (loadedFace) {
+      document.fonts.add(loadedFace);
+      let currentFont = document.getElementById( "currentFont" );
+      let quickBrown = document.getElementById( "quickBrown" );
+
+      currentFont.style.fontFamily = fontName;
+      quickBrown.style.fontFamily = fontName;
+      quickBrown.style.opacity = 1;
+
+
+    });
+    this.setState({ font: fontName })
+    this.setState({ quickBrown: "The Quick Brown Fox Jumped Over The Lazy Dog" })
+
+
+  },
+
   render(){
     return(
       <div className = "instructions" id = "instructions">
@@ -66,8 +95,15 @@ module.exports = React.createClass({
             this.getFonts()
           }
         </div>
-        <div className = "buttonContainer" id = "buttonContainer">
-
+        <div id = "currentFont">
+          {
+            this.state.font
+          }
+        </div>
+        <div id = "quickBrown">
+          {
+            this.state.quickBrown
+          }
         </div>
       </div>
     )

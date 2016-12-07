@@ -40,7 +40,7 @@ module.exports = React.createClass({
         for (var i = 0; i < total; i++) {
           let glyph = new Glyph( i, this.props.font, scale, total );
           result.push( <ReactGlyph key={i} ind = {i} glyph={glyph} glyphId={"Glyph"+i} ></ReactGlyph> )
-      }
+        }
       }else{
         return(
           <LinkToChoose></LinkToChoose>

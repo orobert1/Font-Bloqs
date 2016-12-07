@@ -7,11 +7,13 @@ module.exports = React.createClass( {
   let options={};
   this.props.glyph.render( this.props.glyphId,50,options );
   let icon = document.getElementById( this.props.glyphId );
-  icon.style.opacity = 0;
-  window.setTimeout( function(){
-    icon.style.transition = ".4s";
-    icon.style.opacity = 1;
-  }, this.props.ind * 100 );
+  if( this.props.ind < 40 ){
+    icon.style.opacity = 0;
+    window.setTimeout( function(){
+      icon.style.transition = ".4s";
+      icon.style.opacity = 1;
+    }, this.props.ind * 100 );
+  }
  },
  componentWillReceiveProps(newProps){
    let options={};
