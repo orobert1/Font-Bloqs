@@ -102,9 +102,9 @@ const Actions = require( '../actions/glyphActions' );
       ctx.moveTo( 0,options.yMax );
       ctx.lineWidth = 5;
       ctx.shadowColor = '#999';
-      ctx.shadowBlur = 20;
-      ctx.shadowOffsetX = 5;
-      ctx.shadowOffsetY = 5;
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
       ctx.fillStyle = "black";
       ctx.fill();
     }

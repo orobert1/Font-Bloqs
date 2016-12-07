@@ -21,6 +21,9 @@ body{
   font-family:'Helvetica';
   overflow-x:hidden;
 }
+.smallType{
+  font-size: 8pt;
+}
 button{
   background:none;
   border:none;
@@ -97,6 +100,7 @@ fullContainer{
   background-color: red;
 }
 #shutter31{
+  opacity: 0;
   transition: .4s;
 }
 .scrollable{
@@ -264,11 +268,14 @@ body{
   float:left;
 }
 #linkToChoose{
-  font-family: "Light";
+  font-family: "Medium";
   white-space: nowrap;
-  font-size: 18pt;
+  font-size: 8pt;
   letter-spacing: 5px;
+  text-align: right;
+  padding-left: 50%;
   -webkit-transform: rotate(90deg);
+
 }
 
 #linkToChoose:hover{
@@ -294,16 +301,17 @@ body{
 }
 
 .fontButton{
-  font-size: 16pt;
+  font-size: 8pt;
   max-width: 200px;
   max-height: 200px;
   background-color: none;
   opacity: 0;
-  text-align: right;
+  margin-top: 20px;
+  text-align: left;
   line-height: 1.3em;
-  margin-top: 0px;
+  padding: 4px;
   transition: .4s;
-  font-family: "Light";
+  font-family: "Medium";
   padding:0px;
 }
 
@@ -336,12 +344,12 @@ body{
 .fontChoicesTitle{
   position: absolute;
   font-weight: 200;
-  font-size: 36pt;
+  font-size: 24pt;
   z-index: 1;
   margin-left: 240px;
   top: 0px;
   column-count: 4;
-  column-width: 150px;
+  column-width: 140px;
   font-family: "Medium";
   height: 600px;
   left: -100px;
@@ -378,7 +386,7 @@ body{
   font-weight: 100;
   margin-top: 150px;
   letter-spacing: 2px;
-  font-family: "Light";
+  font-family: "Medium";
   line-height: 1.6em;
 }
 .g{

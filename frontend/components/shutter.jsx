@@ -21,6 +21,10 @@ module.exports = React.createClass({
     div.style.width = "200px";
     div.style.marginLeft = 0 - this.props.gutterX + "px";
     div.style.zIndex = 1000 - this.props.num;
+    window.setTimeout( function(){
+      div.style.transition = "1s";
+      div.style.opacity = 1;
+    }, 500)
 
   },
   componentWillReceiveProps(){

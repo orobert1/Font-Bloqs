@@ -22,7 +22,6 @@ module.exports = React.createClass({
   },
   render(){
     return(
-
       <div id = "quote" className = "quote">
         <div className = "buffer"/>
         <div id = "typePoem">

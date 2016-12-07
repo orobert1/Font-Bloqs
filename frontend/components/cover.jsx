@@ -20,16 +20,26 @@ module.exports = React.createClass({
     }, 1000);
     grid.alignLeft( title, 15 );
     grid.alignTop( title, 10 );
-
+    this.setTime(30);
     window.setInterval(function(){
       let cover = document.getElementById("cover");
         if( window.scrollY < window.innerHeight ){
           cover.style.height = window.innerHeight - window.scrollY + "px";
+          this.setTime(30);
         }else{
           cover.style.height = "0px";
+          this.setTime(1000);
         }
-    }, 30);
+    }.bind(this), this.getTime);
 
+  },
+
+  setTime( time ){
+    this.time = time;
+  },
+
+  getTime(){
+    return this.time;
   },
 
 

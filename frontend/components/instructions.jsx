@@ -15,7 +15,7 @@ module.exports = React.createClass({
   getInitialState(){
     return({ fonts: []});
   },
-  componentDidMount(){
+  componentWillReceiveProps(){
     let quote =  document.getElementById("instructions");
     let fTitle =  document.getElementById("fontChoicesTitle");
     let buttonContainer =  document.getElementById("buttonContainer");
@@ -36,8 +36,7 @@ module.exports = React.createClass({
       for (var i = 0; i < children.length; i++) {
         let child = children[i];
         window.setTimeout( function(){
-          child.style.transition = "2s";
-          child.style.marginTop = "20px";
+          child.style.transition = "4s";
           child.style.opacity = 1;
         }, i*200 );
       }
