@@ -79,6 +79,7 @@ TrueTypeFont.prototype = {
         var file = this.file;
         var offset, old;
         if ( this.indexToLocFormat === 1 ) {
+
             old = file.seek( table.offset + index * 4 );
             offset = file.getUint32();
         } else {
@@ -107,7 +108,9 @@ TrueTypeFont.prototype = {
            xMin: file.getFword(),
            yMin: file.getFword(),
            xMax: file.getFword(),
-           yMax: file.getFword()
+           yMax: file.getFword(),
+           oldGlyph: this.getGlyphStartEnd( index )
+
        };
 
        if ( glyph.numberOfContours === -1 ) {
@@ -224,7 +227,13 @@ TrueTypeFont.prototype = {
      let loca = this.seekTable( 'loca' );
      this.totalGlyphs = ( loca.length / 2 ) - 1;
      this.glyphs = [];
-     
+
+   },
+
+   getGlyphStartEnd: function( index ){
+     let start = this.getGlyphOffset( index );
+     let end = this.getGlyphOffset( index + 1 );
+     return this.file.data.slice( start, end );
    }
 
 

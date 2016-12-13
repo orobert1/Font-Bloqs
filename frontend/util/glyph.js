@@ -13,6 +13,7 @@ const Actions = require( '../actions/glyphActions' );
     this.instructions = this.ttf.file.
     data.slice(this.Glyph.instructionsBegin,
     this.Glyph.instructionsEnd);
+    this.change = false;
     this.data = ttf.file.data;
     this.points = this.Glyph.points;
     this.counter = 0
@@ -26,7 +27,7 @@ const Actions = require( '../actions/glyphActions' );
 
   Glyph.prototype.count = function(){
     this.counter++;
-    if(this.counter > 10){
+    if(this.counter > 20){
       this.update = true;
       this.counter = 0;
     }else{
@@ -143,6 +144,7 @@ const Actions = require( '../actions/glyphActions' );
     };
   }
   Glyph.prototype.dragPoint = function ( point, canvas, evt, div ){
+    this.change = true
     let mouseXY = getMousePos( canvas, evt );
     if( this.update === true ){
       if( evt.clientX!== 0 && evt.clientY!== 0 ){
@@ -177,7 +179,7 @@ const Actions = require( '../actions/glyphActions' );
         total+=18
       } else if( point.EightBitNegx === 1 ){
         total+=2;
-      } else if( point.SixteenBitx === 1 ){
+      } else if( point.SixteenBitx ){
         total+=16;
       }
       if( point.bothy == 1 ){
@@ -218,6 +220,13 @@ const Actions = require( '../actions/glyphActions' );
       }
       j++
       result.push( total );
+    }
+    let newFlags = result;
+    let oldFlags = this.Glyph.oldGlyph.slice( this.flagsStart, this.flagsStart + result.length  );
+    for (var i = 0; i < oldFlags.length; i++) {
+      if( oldFlags[i] !== newFlags[i] ){
+        debugger
+      }
     }
 
      result = result.concat( this.convertPointsToBinary() );
@@ -380,30 +389,43 @@ const Actions = require( '../actions/glyphActions' );
       result.push( 255-( Math.ceil( data/255 ) ) );
       result.push( 256+( data%255 ) );
     } else{
-      result.push( Math.floor( data/255 ) );
-      result.push( ( data%255 ) );
+      result.push( Math.floor( data / 256 ) );
+      result.push( ( data % 256 ) );
+
     }
     return result;
   }
 
   Glyph.prototype.gatherBinary = function(){
     let result = [];
-    result = result.concat(this.convertGlyphMaxMintoBinary());
-    result = result.concat(this.package16(this.instructions.length));
-    result = result.concat(Array.from(this.instructions));
-    result = result.concat(this.convertToBinary());
-    while(result.length%4 !== 0){
-      result.push(0);
+    if( this.change ){
+      result = result.concat(this.convertGlyphMaxMintoBinary());
+      result = result.concat(this.package16(this.instructions.length));
+      result = result.concat(Array.from(this.instructions));
+      this.flagsStart = result.length;
+      result = result.concat(this.convertToBinary());
+      while(result.length%4 !== 0){
+        result.push(0);
+      }
+      while(result.length%4 !== 0){
+        result.push(0);
+      }
+      let place = 0;
+      for (var i = 0; i < this.Glyph.oldGlyph.length; i++) {
+        let old = this.Glyph.oldGlyph[i];
+        let neue = result[i];
+        if( old !== neue ){
+        }
+      }
+      this.binary = result;
+      return result;
+    }else{
+      this.binary = this.Glyph.oldGlyph;
+      return this.Glyph.oldGlyph;
     }
-    while(result.length%4 !== 0){
-      result.push(0);
-    }
-    this.binary = result;
-    return result;
   }
 
   Glyph.prototype.createOffsetIndexItem = function(){
-
     return this.binary.length;
   }
 

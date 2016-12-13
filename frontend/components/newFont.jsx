@@ -24,9 +24,11 @@ module.exports = React.createClass( {
     this.currentFont = fontStore.addListener( this.setTTf );
     this.list = GlyphStore.addListener( this.change );
   },
+
   componentWillUnmount( ){
    GlyphStore.removeListener( this.list );
   },
+
   setTTf( ttf ){
     ttf = fontStore.updateCurrentFont().ttf;
     this.setState({ ttf: ttf, width:( ttf.xMax - ttf.xMin, ttf.yMax- ttf.yMin ), scale:20/ttf.unitsPerEm });
@@ -37,6 +39,7 @@ module.exports = React.createClass( {
 
     }.bind(this), 100 );
   },
+
   change( ){
    let nowGlyph = GlyphStore.getCurrentlySelectedGlyph( );
    if( nowGlyph === this.state.currentGlyph ){
@@ -47,6 +50,7 @@ module.exports = React.createClass( {
     this.updateCurrentGlyph( nowGlyph );
    }
   },
+
   updateCurrentGlyph( nowGlyph ){
    let id = Number( nowGlyph.substring( 5 ) )
    let options = {showMax:true, ascender: this.state.ascender, descender:this.state.descender, newGlyph:true};

@@ -20,12 +20,12 @@ module.exports = React.createClass({
     }, 1000);
     grid.alignLeft( title, 15 );
     grid.alignTop( title, 10 );
-    this.setTime(30);
+    this.setTime(10);
     window.setInterval(function(){
       let cover = document.getElementById("cover");
         if( window.scrollY < window.innerHeight ){
           cover.style.height = window.innerHeight - window.scrollY + "px";
-          this.setTime(30);
+          this.setTime(10);
         }else{
           cover.style.height = "0px";
           this.setTime(1000);

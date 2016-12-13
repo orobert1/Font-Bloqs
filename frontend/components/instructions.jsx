@@ -46,6 +46,11 @@ module.exports = React.createClass({
         window.setTimeout( function(){
           child.style.transition = "4s";
           child.style.opacity = 1;
+          window.setTimeout( function(){
+
+            child.style.transition = ".4s";
+          }, 200);
+
         }, i*200 );
       }
     });
@@ -78,6 +83,8 @@ module.exports = React.createClass({
       currentFont.style.fontFamily = fontName;
       quickBrown.style.fontFamily = fontName;
       quickBrown.style.opacity = 1;
+      currentFont.style.opacity = 1;
+
 
 
     });

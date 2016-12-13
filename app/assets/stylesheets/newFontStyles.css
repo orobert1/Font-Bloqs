@@ -165,10 +165,47 @@ fullContainer{
   width: 800px;
   height: 600px;
   position: absolute;
-  top: 200px;
+  top: 150px;
   margin-top: 20px;
   position: relative;
   margin: 20px auto;
+}
+#download{
+  position: absolute;
+  width: 100;
+  font-family: "Medium";
+  font-size: 8pt;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid black;
+  transition: .8s;
+  z-index: 1000000000;
+
+}
+#download:hover{
+  color: yellow;
+  cursor: pointer;
+  transition: .8s;
+
+}
+
+#check{
+  position: absolute;
+  width: 100;
+  font-family: "Medium";
+  font-size: 8pt;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid black;
+  transition: .8s;
+  z-index: 1000000000;
+
+}
+#check:hover{
+  color: yellow;
+  cursor: pointer;
+  transition: .8s;
+
 }
 .bigDrag{
   width:100px;
@@ -286,6 +323,7 @@ body{
   margin-left: 600px;
   margin-top: 100px;
   font-size: 8pt;
+  opacity: 0;
   text-align: right;
   transition: 2s;
 }
@@ -342,7 +380,7 @@ body{
 
 .fontButton:hover{
   cursor: pointer;
-  background-color: yellow;
+  color: yellow;
   transition: .4s;
 }
 
