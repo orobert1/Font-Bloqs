@@ -1,0 +1,548 @@
+@font-face {
+}
+@font-face {
+    font-family: "F37";
+    src: url("1.otf");
+}
+@font-face {
+    font-family: "Super";
+    src: url("Graphik-Super.otf");
+}
+@font-face {
+    font-family: "Light";
+    src: url("Graphik-Thin.otf");
+}
+
+@font-face {
+    font-family: "Medium";
+    src: url("Graphik-Medium.otf");
+}
+body{
+  font-family:'Helvetica';
+  overflow-x:hidden;
+}
+.smallType{
+  font-size: 8pt;
+}
+button{
+  background:none;
+  border:none;
+  font-size:1em;
+  color:blue;
+}
+.dropTarget{
+  float:right;
+  width:400px;
+  margin-top:20px;
+  height:250px;
+  border:dashed;
+  border-color:black;
+  opacity:.7;
+  border-width:4pt;
+  border-radius: 5pt;
+  transition: .4s;
+  overflow: hidden;
+}
+@-webkit-keyframes anim {
+  0%{
+    background-color: rgb( 200,240,220 );
+  }
+  50%{
+    background-color: rgb( 240,240,0 );
+  }
+  100%{
+    background-color: rgb( 200,240,220 );
+  }
+}
+@-webkit-keyframes change {
+  0%{
+    float:left;
+    width:100%;
+    color:black;
+    margin-left:0px;
+    background-color: rgb( 255,255,255 );
+  }
+  10%{
+
+    border-radius:100%;
+  }
+  50%{
+    margin-left:120%;
+
+    width:30px;
+  }
+  100%{
+    background-color: rgb( 200,240,220 );
+    color:rgb( 200,240,220 );
+    width:30px;
+    border-radius:100%;
+    opacity:0;
+    margin-left:40%;
+
+
+  }
+}
+.drag-target-dragged{
+}
+.inner-text-drag-target-dragged{
+   -webkit-animation: change 1s normal forwards ease-in-out;
+}
+.container{
+  margin-top:80px;
+  width:817px;
+  height:300px;
+
+  border:4px dashed rgb( 100,100,100 );
+  overflow:hidden;
+}
+fullContainer{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+#shutter31{
+  opacity: 0;
+  transition: .4s;
+}
+.scrollable{
+  height:100%;
+  width:40%;
+  overflow: hidden;
+  overflow-y: scroll;
+  transition: 3s;
+  margin: 0 auto;
+}
+.glyphIcon{
+  float:left;
+  padding:5px;
+  border:0px rgb( 200,0,0 ) solid;
+  width:50px;
+  transition:.2s;
+
+}
+.glyphIcon:hover{
+  background-color:rgb( 250,200,200 );
+  display: inline-block;
+  transition:.2s;
+  cursor: pointer;
+  -webkit-animation: anim 1s infinite ease-in-out;
+
+}
+
+.inner-center-text{
+  margin-top: 120px;
+  font-weight:900;
+  font-size:24pt;
+  text-align: center;
+  color:rgb( 150,150,150 );
+}
+.spacer{
+  width:100%;
+  height:80px;
+  margin-top:20px;
+  margin-bottom:20px;
+  padding:none;
+  border-radius: 10px;
+}
+.controls{
+  background-color: yellow;
+  width:10px;
+  height:10px;
+  border-radius:100%;
+  position: absolute;
+  opacity: .7;
+}
+.controls:hover{
+  cursor: pointer;
+
+}
+
+.content{
+  margin:0 auto;
+  width:826px;
+}
+.glyphContainer{
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  top: 150px;
+  margin-top: 20px;
+  position: relative;
+  margin: 20px auto;
+}
+#download{
+  position: absolute;
+  width: 100;
+  font-family: "Medium";
+  font-size: 8pt;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid black;
+  transition: .8s;
+  z-index: 1000000000;
+
+}
+#download:hover{
+  color: yellow;
+  cursor: pointer;
+  transition: .8s;
+
+}
+
+#check{
+  position: absolute;
+  width: 100;
+  font-family: "Medium";
+  font-size: 8pt;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid black;
+  transition: .8s;
+  z-index: 1000000000;
+
+}
+#check:hover{
+  color: yellow;
+  cursor: pointer;
+  transition: .8s;
+
+}
+.bigDrag{
+  width:100px;
+  height:100px;
+  background-color: red;
+  float:left;
+}
+.rightcont{
+  float:right;
+  width:350px;
+}
+.convert{
+  width: 400px;
+    height: 100px;
+    text-align: center;
+    float: right;
+    border: 4px dashed black;
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 20pt;
+    color: rgb( 200,200,200 );
+    padding-top: 30px;
+    transition:1s;
+}
+.download{
+  color:green;
+}
+
+.convert:hover{
+  cursor:pointer;
+  background-color: rgb( 255,255,150 );
+  transition:1.5s;
+}
+.chooseFont{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  opacity: .5;
+  background-color: black;
+  z-index: 1000;
+}
+body{
+  margin: 0px;
+}
+.chooseFontShelf{
+    position: fixed;
+    width: 50%;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 4px 1px 10px rgba(0,0,0,.5);
+    transition: .8s cubic-bezier(0,0,.1,1);
+}
+.shelfTitle {
+    margin-left: 10%;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-size: 36pt;
+    font-family: "Super";
+    float: left;
+    width: 500px;
+}
+.font{
+  float:left;
+  margin-left: 15%;
+  color:black;
+  border: dashed 4px black;
+  border-radius: 5pt;
+  padding: 25px;
+  padding-right: 50%;
+  margin-top: 10px;
+  font-size: 24pt;
+  clear:both;
+  height:80px;
+  transition: .8s;
+}
+#cover{
+  position: fixed;
+  top:0px;
+  left:0px;
+  z-index: 1000;
+  background-color: white;
+}
+.inside{
+  float: left;
+  width: 100%;
+  height:100%;
+  position: relative;
+}
+.shutter{
+  box-shadow: 5px 0px 15px 5px rgba(0,0,0,.15);
+  height:100%;
+  background-color: white;
+  position: relative;
+  float:left;
+}
+#linkToChoose{
+  font-family: "Medium";
+  white-space: nowrap;
+  font-size: 8pt;
+  letter-spacing: 5px;
+  text-align: right;
+  padding-left: 50%;
+  -webkit-transform: rotate(90deg);
+
+}
+
+#currentFont{
+  font-family: "Medium";
+  position: relative;
+  margin-left: 600px;
+  margin-top: 100px;
+  font-size: 8pt;
+  opacity: 0;
+  text-align: right;
+  transition: 2s;
+}
+
+#linkToChoose:hover{
+  cursor: pointer;
+  color: yellow;
+}
+
+#quickBrown{
+  font-family: "Medium";
+  letter-spacing: 1px;
+  position: relative;
+  text-align: right;
+  margin-top: 100px;
+  opacity: 0;
+  font-size: 18pt;
+  line-height: 1.6em;
+  color: rgb(0,0,0);
+  transition: 2s;
+}
+
+.cloud{
+  position: absolute;
+  top:0px;
+  left: 0px;
+  background-repeat: none;
+  background-size: auto 100%;
+  width: 1000px;
+  margin-left: -400px;
+  opacity: 1;
+  height: 200px;
+  transition-timing-function: cubic-bezier(0.645, 0.020, 0.0, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.645, 0.020, 0.175, 0.990);
+  transition: 2s;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fontButton{
+  font-size: 8pt;
+  max-width: 200px;
+  max-height: 200px;
+  background-color: none;
+  opacity: 0;
+  margin-top: 20px;
+  text-align: left;
+  line-height: 1.3em;
+  padding: 4px;
+  transition: .4s;
+  font-family: "Medium";
+  padding:0px;
+}
+
+.fontButton:hover{
+  cursor: pointer;
+  color: yellow;
+  transition: .4s;
+}
+
+.cloud1{
+  background-image: url("1.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+.cloud4{
+  background-image: url("4.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.head{
+  position: fixed;
+  z-index: 1000000000000;
+}
+.cloud2{
+  background-image: url("2.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+.fontChoicesTitle{
+  position: absolute;
+  font-weight: 200;
+  font-size: 24pt;
+  z-index: 1;
+  margin-left: 240px;
+  top: 0px;
+  column-count: 4;
+  column-width: 140px;
+  font-family: "Medium";
+  height: 600px;
+  left: -100px;
+  opacity: 0;
+
+}
+.quote{
+  float: left;
+  position: relative;
+  height: 400px;
+  background-color: white;
+  position: relative;
+}
+.instructions{
+  float: left;
+  position: relative;
+  background-color: white;
+}
+.buffer{
+  background-color: white;
+  width:100%;
+  float:left;
+  box-shadow: 10px 10px 40px rgba(0,0,0,.2);
+  height: 20px;
+}
+
+.glyphCanvas{
+  float:left;
+}
+
+#typePoem{
+  opacity: 0;
+  font-size: 8pt;
+  font-weight: 100;
+  margin-top: 150px;
+  letter-spacing: 2px;
+  font-family: "Medium";
+  line-height: 1.6em;
+}
+.g{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 400px;
+  width: 1200px;
+  background-image: url("g.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  opacity: 0;
+}
+.leftRule{
+  height: 1px;
+  float:right;
+  width: 100%;
+  margin-top: -5%;
+
+
+  background-color: black;
+}
+
+.rightRule{
+  height: 1px;
+  float:left;
+  margin-top: -12%;
+  width: 600%;
+  background-color: black;
+
+}
+.text1{
+  position: absolute;
+  top:0px;
+  left: 0px;
+  font-family: "F37";
+  max-width: 200px;
+  height: 200px;
+}
+
+.font:hover{
+  background-color: rgb( 255,255,150 );
+  transition: .8s;
+  cursor: pointer;
+}
+#editCanvas{
+    margin-left: 200px;
+    position: relative;
+}
+.overlay{
+  background-color: black;
+  opacity: .8;
+  position: fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  display: none;
+}
+
+.coverVideo{
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+#title{
+  position: absolute;
+  text-align: center;
+  font-family: "Super";
+  opacity: 0;
+  color: rgb(55,55,55)
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border: 0px;
+  overflow: hidden;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
