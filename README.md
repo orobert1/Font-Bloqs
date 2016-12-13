@@ -2,8 +2,11 @@
 
 ## *A True Type Editing Interface*
 
+![Project Page](images/fontBloqsGithub.jpg)
+
+
 ###Takes a True Type Font
-Drag in any .ttf file of your choice or choose from a list of pre-supplied files.
+Drag in any .ttf file of your choice or choose from a list of pre-supplied files. fuck
 
 ###Edit
 Click a Glyph and load the points to the canvas. There you can drag the loaded points wherever you want.

@@ -122,6 +122,7 @@ const Actions = require( '../actions/glyphActions' );
     $( '.glyphContainer' ).children( '.controls' ).remove();
     for ( var i = 0; i < points.length; i ++ ) {
       let point = points[i];
+      point.index = i;
       ctx.moveTo( point.x,point.y );
       let div = document.createElement( "div" );
       div.className = "controls";
@@ -145,6 +146,7 @@ const Actions = require( '../actions/glyphActions' );
   }
   Glyph.prototype.dragPoint = function ( point, canvas, evt, div ){
     this.change = true
+    point.drag = true;
     let mouseXY = getMousePos( canvas, evt );
     if( this.update === true ){
       if( evt.clientX!== 0 && evt.clientY!== 0 ){
@@ -223,11 +225,6 @@ const Actions = require( '../actions/glyphActions' );
     }
     let newFlags = result;
     let oldFlags = this.Glyph.oldGlyph.slice( this.flagsStart, this.flagsStart + result.length  );
-    for (var i = 0; i < oldFlags.length; i++) {
-      if( oldFlags[i] !== newFlags[i] ){
-        debugger
-      }
-    }
 
      result = result.concat( this.convertPointsToBinary() );
 
@@ -424,6 +421,9 @@ const Actions = require( '../actions/glyphActions' );
       return this.Glyph.oldGlyph;
     }
   }
+
+
+
 
   Glyph.prototype.createOffsetIndexItem = function(){
     return this.binary.length;
